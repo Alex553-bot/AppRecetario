@@ -8,4 +8,17 @@ public class Ingrediente {
         unidad = uni;
         cantidad = c;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Ingrediente) {
+            return (identificador
+                .equals(((Ingrediente)o).getNombre()));
+        }
+        return false;
+    }
+
+    public String getNombre() {
+        return identificador;
+    }
 }

@@ -1,9 +1,11 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Receta {
-    private String                  titulo;
-    private String                  descripcion;
-    private ArrayList<Ingrediente>  ingredientes;
+    private String                      titulo;
+    private String                      descripcion;
+    private ArrayList<Ingrediente>      ingredientes;
+    private HashMap<Integer, String>    pasos;
     public Receta(String nombre) {
         titulo = nombre;
         
@@ -18,5 +20,13 @@ public class Receta {
             ing.equals(ingredientes.get(i));
         }
         return true;
+    }
+
+    public void agregarProceso(int k, String proc) 
+    throws Exception 
+    {
+        if(pasos.containsKey(k))
+            throw new Exception("hubo un error con el proceso");
+        pasos.put(k, proc);
     }
 }
