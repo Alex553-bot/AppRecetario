@@ -16,10 +16,14 @@ public class Receta {
     }
     
     public boolean agregarIngrediente(Ingrediente ing) {
-        for (int i=0; i<ingredientes.size();i++) {
-            ing.equals(ingredientes.get(i));
+        boolean res = false;
+        for (int i=0; i<ingredientes.size() && !(res);i++) {
+            res = ing.equals(ingredientes.get(i));    
         }
-        return true;
+        if (!res) {
+            ingredientes.add(ing);
+        }
+        return res;
     }
 
     public void agregarProceso(int k, String proc) 
