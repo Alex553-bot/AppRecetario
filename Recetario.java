@@ -5,6 +5,7 @@ public class Recetario {
         directorio = new File("Recetario/");
     
     public boolean registrarReceta(Receta r) {
-        return true;
+        boolean res = (r!=null);
+        return res;
     }
 }

@@ -6,4 +6,6 @@ comment2.params=nombre\ descr
 comment2.target=Receta(java.lang.String,\ java.lang.String)
 comment3.params=ing
 comment3.target=boolean\ agregarIngrediente(Ingrediente)
-numComments=4
+comment4.params=k\ proc
+comment4.target=void\ agregarProceso(int,\ java.lang.String)
+numComments=5
