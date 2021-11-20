@@ -6,4 +6,6 @@ comment2.params=
 comment2.target=void\ setUp()
 comment3.params=
 comment3.target=void\ tearDown()
-numComments=4
+comment4.params=
+comment4.target=void\ testNombreNulo()
+numComments=5
