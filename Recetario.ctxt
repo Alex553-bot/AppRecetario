@@ -1,5 +1,13 @@
 #BlueJ class context
 comment0.target=Recetario
-comment1.params=r
-comment1.target=boolean\ registrarReceta(Receta)
-numComments=2
+comment1.params=
+comment1.target=Recetario()
+comment2.params=r
+comment2.target=boolean\ registrarReceta(Receta)
+comment3.params=nombre
+comment3.target=java.io.File\ crearReceta(java.lang.String)
+comment4.params=r
+comment4.target=boolean\ verificarReceta(Receta)
+comment5.params=f\ r
+comment5.target=void\ escribirReceta(java.io.File,\ Receta)
+numComments=6

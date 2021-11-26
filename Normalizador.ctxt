@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Normalizador
+comment1.params=text
+comment1.target=java.lang.String\ standardize(java.lang.String)
+comment2.params=array
+comment2.target=java.lang.String[]\ standardizeArray(java.lang.String[])
+comment3.params=text
+comment3.target=java.lang.String\ removeBlankSpaces(java.lang.String)
+comment4.params=word
+comment4.target=boolean\ emptyNullWord(java.lang.String)
+comment5.params=word
+comment5.target=boolean\ matched(java.lang.String)
+numComments=6

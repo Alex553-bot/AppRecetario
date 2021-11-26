@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=GeneradorReceta
+comment1.params=titulo
+comment1.target=void\ crearReceta(java.lang.String)
+comment2.params=r
+comment2.target=void\ llenarReceta(Receta)
+numComments=3
