@@ -18,19 +18,4 @@ public class Normalizador {
         text = text.replaceAll("\\s+", " ");
         return text;
     }
-    
-    public static boolean emptyNullWord(String word) throws Exception{
-        if(word.isEmpty() || word == null) {
-            throw new Exception("Voids are not accepted >:v");
-        }
-        return false;
-    }
-        
-    public static boolean matched(String word) throws Exception{
-        boolean isNumeric = word.matches("[+-]?\\d*(\\.\\d+)?");
-        if(isNumeric) {
-            throw new Exception();
-        }
-        return isNumeric;
-    }
 }

@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=GeneradorArchivos
+comment1.params=titulo\ carpeta
+comment1.target=java.io.File\ crearReceta(java.lang.String,\ java.io.File)
+comment2.params=r\ fichero
+comment2.target=void\ llenarReceta(Receta,\ java.io.File)
+comment3.params=r\ fichero
+comment3.target=void\ llenarReceta1(Receta,\ java.io.File)
+numComments=4

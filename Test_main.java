@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.*;
 import java.io.File;
+import java.util.ArrayList;
 
 import static org.mockito.Mockito.*;
 import org.mockito.*;
@@ -23,7 +24,8 @@ public class Test_main {
 
     @BeforeEach
     public void setUp() throws Exception{
-        receta = new Receta("sopa de mani");
+        recetario = new Recetario();
+        receta = new Receta("sopa de mani", null);
     }
 
     @AfterEach
@@ -181,19 +183,20 @@ public class Test_main {
         Ingrediente i = new Ingrediente(1, "kg", "pollo");
         assertTrue(receta.verificarIngrediente(i));
     }
-    
+
     @Test
     public void testVerificarProcesoExistente() throws Exception {
         receta.agregarProceso("este es un paso");
         assertFalse(receta.verificarProceso("eSte es un paso"));
     }
+
     @Test
     public void testVerificarProcesoNuevo() throws Exception {
         receta.agregarProceso("este es un paso");
         assertTrue(receta.verificarProceso("este es otro paso"));
     }
-    
-    @Test 
+
+    //@Test 
     public void testValidarUnaRecetaValida() throws Exception {
         receta.agregarIngrediente(new Ingrediente(1, "manzana"));
         receta.agregarIngrediente(new Ingrediente(5, "platano"));
@@ -204,22 +207,42 @@ public class Test_main {
         assertTrue(receta.esValida());
     }
 
+    @Test 
+    public void testInvalidarRecetaNula() {
+        recetario = new Recetario();
+        assertFalse(recetario.validarReceta(null));
+    }
+
     @Test
+    public void testInvalidaRecetaInvalida() throws Exception{
+        receta = new Receta("a", null);
+        receta.agregarIngrediente(new Ingrediente(1, "cebolla"));
+        receta.agregarProceso("paso");
+        recetario = new Recetario();
+        assertFalse(recetario.validarReceta(receta));
+    }
+
+    //@Test
     public void testValidarUnaRecetaInvalida() {
         assertFalse(receta.esValida());
     }
     // que hace una receta?
     // recetario-> administrar recetas
     // receta -> almacena una receta?
-    @Test
+    //@Test
     public void testValidarUnaRecetaNula() {
         //assertFalse(recetario.validarReceta(null));
     }
-    
+
+    @Test
+    public void testCrearArchivo() {
+
+    }
+
     @Test
     public void testCrearUnaRecetaConContenido() throws Exception{
         Recetario recetario = new Recetario();
-        Receta receta = new Receta("sopa de mani");
+        Receta receta = new Receta("sopa de mani", null);
         Ingrediente i1 = new Ingrediente(1, "taza", "arroz");
         Ingrediente i2 = new Ingrediente(2, "papa");
         Ingrediente i3 = new Ingrediente(2, "libras", "mani");
@@ -229,14 +252,14 @@ public class Test_main {
         receta.agregarProceso("este es el primer paso");
         receta.agregarProceso("este es el segundo paso");
         File f = recetario.crearReceta("SOPA_DE_MANI.txt");
-        recetario.escribirReceta(f, receta);
+        //recetario.escribirReceta(f, receta);
         assertNotEquals(0, f.length());
     }
 
     @Test
     public void testImpresionRecetaFormato() throws Exception{
-        Receta receta1 = new Receta("sopa de mani");
-        Receta receta2 = new Receta("sopa de mani");
+        Receta receta1 = new Receta("sopa de mani", null);
+        Receta receta2 = new Receta("sopa de mani", null);
         Ingrediente i1 = new Ingrediente(5, "papa");
         Ingrediente i2 = new Ingrediente(2, "taza", "arroz");
         String paso1 = "hervir la papa";
@@ -252,5 +275,178 @@ public class Test_main {
         System.out.println(receta1.toString());
         assertEquals(receta1.toString(), receta2.toString());
     }
-    
+
+    //@Test 
+    public void testVerificarArchivoVerificado() throws Exception {
+        receta.agregarIngrediente(new Ingrediente(5, "manzana"));
+        receta.agregarIngrediente(new Ingrediente(4, "sandia"));
+        receta.agregarProceso("picar las frutas en cubos de alrededor de 1 cm de tamaño," 
+            +"y siempre retirar las semillas en el caso de sandías, papayas, melones, etc.");
+        receta.agregarProceso("mezcla las porciones de fruta");
+        recetario = new Recetario("/home/alex/");
+        recetario.registrarReceta(receta);
+        File f = new File("/home/alex/Recetario/sopa_de_mani.txt");
+        assertTrue(f.exists());
+    }
+
+    //@Test
+    public void testArchivoInexistente() throws Exception{
+        File f = new File("Recetario/receta.txt");
+        Buscador mock = org.mockito.Mockito.mock(Buscador.class);
+        String a = "archivo";
+        //when(busc.buscarReceta(a)).thenReturn(f);
+        when(mock.buscarReceta(anyString())).thenReturn(null);
+        //assertEquals(f, busc.buscarReceta("archivo"));
+    }
+
+    //@Test
+    public void testValidarRecetaValida() {
+        try {
+            ArrayList<Ingrediente> ings = new ArrayList<>();
+            ings.add(new Ingrediente(1, "sandia"));
+            ings.add(new Ingrediente(2, "papaya"));
+            ings.add(new Ingrediente(1, "lt", "yogurt"));
+            receta.setIngredientes(ings);
+            receta.agregarProceso("este es un paso");
+            receta.agregarProceso("este es otro paso");
+            assertTrue(Validador.validarReceta(receta));
+        } catch (Exception e) {
+            fail("hubo algun error");
+        }
+    }
+
+    @Test 
+    public void testValidarReceta() {
+        try {
+            ArrayList<Ingrediente> ings = new ArrayList<>();
+            ings.add(new Ingrediente(1, "sandia"));
+            ings.add(new Ingrediente(2, "papaya"));
+            ings.add(new Ingrediente(1, "lt", "yogurt"));
+            receta.setIngredientes(ings);
+            receta.agregarProceso("este es un paso");
+            receta.agregarProceso("este es otro paso");
+            assertTrue(recetario.validarReceta(receta));
+        } catch (Exception e) {
+        } 
+    }
+
+    //@Test
+    public void testInvalidarRecetaInvalida1() {
+        assertFalse(Validador.validarReceta(receta));
+    }
+
+    //@Test 
+    public void testInvalidarRecetaNula2() {
+        assertFalse(Validador.validarReceta(null));
+    }
+
+    @Test
+    public void testGenerarArchivo() {
+        File dir = new File("Recetario/");
+        File f =GeneradorArchivos.crearReceta("prueba",dir);
+        assertTrue(f.exists());
+    }
+
+    @Test 
+    public void testNogenerarArchivoSiNoTenemosDirectorio() {
+        File dir = new File("Recetario/");
+        File f =GeneradorArchivos.crearReceta("prueba",dir);
+        File nuevo = GeneradorArchivos.crearReceta("prueba2",f);
+        assertEquals(nuevo, null);
+    }
+
+    @Test 
+    public void testEscrituraIngredientes() {
+        try {
+            Ingrediente i = new Ingrediente(1, "lt", "aceite");
+            String esperado = "1.0 lt aceite";
+            assertEquals(esperado, i.toString());
+        } catch (Exception e) {}
+    }
+
+    @Test
+    public void testEscrituraIngredientes2() {
+        Ingrediente i = new Ingrediente(2, "sandia");
+        String esperado = "2 sandias";
+        assertEquals(esperado, i.toString());
+    }
+
+    @Test 
+    public void testEscrituraReceta() throws Exception {
+        Receta r = new Receta("titulo", null);
+        r.agregarIngrediente(new Ingrediente(2, "lb", "arroz"));
+        r.agregarProceso("proceso");
+        String esperado = 
+            "titulo\n\n"
+            +"INGREDIENTES:\n"
+            +"   - 2.0 lbs arroz"
+            +"\nPREPARACION:\n"
+            +"   1.- proceso";
+        assertEquals(esperado, r.toString());
+    }
+
+    @Test 
+    public void testEscrituraRecetaDescripcion() throws Exception {
+        Receta r = new Receta("titulo", "descripcion");
+        r.agregarIngrediente(new Ingrediente(2, "lb", "arroz"));
+        r.agregarProceso("proceso");
+        String esperado = 
+            "titulo\n"
+            +"descripcion\n"
+            +"INGREDIENTES:\n"
+            +"   - 2.0 lbs arroz"
+            +"\nPREPARACION:\n"
+            +"   1.- proceso";
+        assertEquals(esperado, r.toString());
+    }
+
+    @Test
+    public void testEscrituraArchivo() throws Exception {
+        File file = new File("Recetario/prueba");
+        receta = new Receta("prueba", "debe funcionar");
+        receta.agregarIngrediente(new Ingrediente(4, "papa"));
+        receta.agregarIngrediente(new Ingrediente(2, "kg", "pollo"));
+        receta.agregarProceso("este es un proceso");
+        receta.agregarProceso("este es otro proceso");
+        GeneradorArchivos.llenarReceta(receta,file);
+        assertNotEquals(0, file.length());
+    }
+
+    @Test
+    public void testEscrituraRecetaArchivo() {
+        try {
+            recetario = new Recetario();
+            receta = new Receta("Receta", "esta es una descripcion");
+            receta.agregarIngrediente(new Ingrediente(4, "papa"));
+            receta.agregarIngrediente(new Ingrediente(2, "kg", "pollo"));
+            receta.agregarProceso("este es un proceso");
+            receta.agregarProceso("este es otro proceso");
+            assertTrue(recetario.registrarReceta(receta));
+        } catch (Exception e) {
+            fail("hubo un error");
+        }
+    } 
+
+    @Test
+    public void testEscrituraArhivoValidacion() {
+        try {
+            recetario = new Recetario();
+            receta = new Receta("Receta", "esta es una descripcion");
+            assertFalse(recetario.registrarReceta(receta));
+        } catch (Exception e) {
+            fail("hubo un error");
+        }
+    }
+
+    //@Test
+    public void testProcesoNulo() {
+        try {
+            receta = new Receta("nombre", null);
+            String paso = null;
+            receta.agregarProceso(paso);
+            fail("error agrego paso");
+        } catch (Exception e) {
+            assertEquals("error al ingresar el paso", e.getMessage());
+        }
+    }
 }

@@ -11,6 +11,7 @@ public class Ingrediente {
         unidad = uni;
         cantidad = Math.abs(c);
     }
+
     public Ingrediente(int c, String nombre) {
         cantidad = c;
         identificador = nombre;
@@ -27,7 +28,7 @@ public class Ingrediente {
         }
         return false;
     }
-    
+
     private void absorverIngrediente(Ingrediente other) {
         cantidad += other.getCantidad();
     }
@@ -35,20 +36,30 @@ public class Ingrediente {
     public String getNombre() {
         return identificador;
     }
+
     public double getCantidad() {
         return cantidad;
     }
+
     public String getUnidad() {
         return unidad;
     }
+    
     @Override 
     public String toString() {
-        String cadena = cantidad + " ";
+        String cadena = "";
         if ((cantidad>1))
             if (!((unidad==null) || unidad.isEmpty()))
-                cadena += unidad+"s "+identificador;
+                cadena += cantidad +" "+ unidad+"s "+identificador;
             else 
-                cadena += identificador+"s";
+                cadena += (int)(cantidad)+" "+identificador+"s";
+        else {
+            cadena = cantidad+" ";
+            if (unidad==null || unidad.isEmpty())
+                cadena += identificador;
+            else 
+                cadena += unidad + " "+identificador;
+        }
         return cadena;
     }
 }
