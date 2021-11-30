@@ -18,11 +18,11 @@ public class GeneradorArchivos {
         return archivoReceta;
     }
 
-    public static void llenarReceta(Receta r, File fichero) {
+    public static void llenarReceta(String n, File fichero) {
         try {
             FileWriter fr = new FileWriter(fichero, false);
             BufferedWriter br = new BufferedWriter(fr);
-            br.write(r.toString());
+            br.write(n);
             br.close();
             fr.close();
         } catch (IOException ioe) {

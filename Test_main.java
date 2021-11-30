@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.*;
 import java.io.File;
 import java.util.ArrayList;
+import java.io.IOException;
 
 import static org.mockito.Mockito.*;
 import org.mockito.*;
@@ -130,6 +131,7 @@ public class Test_main {
             receta.agregarIngrediente(i3);
 
             receta.agregarProceso("este es el proceso");
+            receta.agregarProceso("este es otro proceso");
         } catch (Exception e) {
             fail("algo esta mal");
         }
@@ -330,16 +332,6 @@ public class Test_main {
         } 
     }
 
-    //@Test
-    public void testInvalidarRecetaInvalida1() {
-        assertFalse(Validador.validarReceta(receta));
-    }
-
-    //@Test 
-    public void testInvalidarRecetaNula2() {
-        assertFalse(Validador.validarReceta(null));
-    }
-
     @Test
     public void testGenerarArchivo() {
         File dir = new File("Recetario/");
@@ -408,7 +400,7 @@ public class Test_main {
         receta.agregarIngrediente(new Ingrediente(2, "kg", "pollo"));
         receta.agregarProceso("este es un proceso");
         receta.agregarProceso("este es otro proceso");
-        GeneradorArchivos.llenarReceta(receta,file);
+        GeneradorArchivos.llenarReceta(receta.toString(),file);
         assertNotEquals(0, file.length());
     }
 
@@ -449,4 +441,14 @@ public class Test_main {
             assertEquals("error al ingresar el paso", e.getMessage());
         }
     }
+    
+    @Test
+    public void testEscrituraSobreArchivoExistente() throws IOException{
+        String aux = "cadena cualquiera";
+        File fileAux = new File("Recetario/prueba2.txt");
+        fileAux.createNewFile();
+        GeneradorArchivos.llenarReceta(aux,fileAux);
+        assertNotEquals(0, fileAux.length());
+    }
+    // no esta permitido el uso de condifcionales y ciclos en 
 }

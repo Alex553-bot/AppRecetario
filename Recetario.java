@@ -19,7 +19,7 @@ public class Recetario {
         if ((r!=null) && validarReceta(r)) {
             File f = GeneradorArchivos.crearReceta(r.getTitulo()
                         ,directorio.getAbsoluteFile());
-            GeneradorArchivos.llenarReceta(r, f);
+            GeneradorArchivos.llenarReceta(r.toString(), f);
             return true;
         }
         return false;
