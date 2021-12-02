@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=PriorityRecipe
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Hola\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=ocurrencia\ receta
+comment1.target=PriorityRecipe(int,\ java.io.File)
+comment2.params=otro
+comment2.target=int\ compareTo(PriorityRecipe)
+comment3.params=
+comment3.target=java.io.File\ getFile()
+comment4.params=
+comment4.target=java.lang.String\ toString()
+comment5.params=
+comment5.target=int\ getOcurrencia()
+comment6.params=
+comment6.target=java.lang.String\ getTituloIngredientes()
+numComments=7

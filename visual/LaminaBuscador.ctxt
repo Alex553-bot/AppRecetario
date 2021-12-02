@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=LaminaBuscador
+comment1.params=frame
+comment1.target=LaminaBuscador(FrameBuscador)
+comment1.text=\r\n\ n\ ->\ numero\ de\ recetas\ encontradas\r\n\ (int)(Math.ceil(n/2.0)*200);\r\n
+comment2.params=recetas
+comment2.target=void\ setQueue(java.util.PriorityQueue)
+comment3.params=
+comment3.target=void\ write()
+numComments=4
