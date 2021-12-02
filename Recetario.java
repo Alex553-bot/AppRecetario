@@ -44,7 +44,7 @@ public class Recetario {
             ArrayList<Ingrediente> i = r.getIngredientes();
             ArrayList<String> pasos = r.getPasos();
             try {
-                Validador.emptyNullWord(titulo);
+                Normalizador.emptyNullWord(titulo);
                 res = (titulo.length()>4) && (titulo.length()<80);
                 res = res && (i.size()>=2);
                 res = res && (pasos.size()>=2);

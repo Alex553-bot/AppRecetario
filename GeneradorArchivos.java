@@ -7,7 +7,7 @@ public class GeneradorArchivos {
     public static File crearReceta(String titulo, File carpeta) { 
         File archivoReceta = null;
         if (carpeta.isDirectory()) {
-            titulo = titulo.replaceAll("\\s+", "_");
+            titulo = titulo.replaceAll("\\s+", "").toLowerCase();
             archivoReceta = new File(carpeta.getAbsolutePath()+"/"+titulo+".txt");
             try {
                 archivoReceta.createNewFile();
@@ -28,18 +28,5 @@ public class GeneradorArchivos {
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
-    }
-
-    public static void llenarReceta1(Receta r, File fichero) {
-        if (Validador.validarReceta(r))
-            try {
-                FileWriter fr = new FileWriter(fichero, false);
-                BufferedWriter br = new BufferedWriter(fr);
-                br.write(r.toString());
-                br.close();
-                fr.close();
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-            }
     }
 }

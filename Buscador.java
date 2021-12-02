@@ -1,7 +1,7 @@
 import java.io.File;
 
 public class Buscador {
-    public static File buscarReceta(String nombre) throws Exception {
+    public File buscarReceta(String nombre) throws RuntimeException {
         return null;
     }
 }

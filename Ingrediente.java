@@ -1,11 +1,11 @@
-public class Ingrediente {
+public class Ingrediente implements Comparable{
     private String  identificador;
     private String  unidad;
     private double  cantidad;
-    public Ingrediente(double c, String uni, String nombre) 
-    throws Exception
-    {
-        if(c==0)
+
+    public Ingrediente(double c, String uni, String nombre) throws Exception{
+        Normalizador.emptyNullWord(nombre);
+        if (c==0)
             throw new Exception("cantidad negativa no permitida");
         identificador = nombre;
         unidad = uni;
@@ -13,38 +13,50 @@ public class Ingrediente {
     }
 
     public Ingrediente(int c, String nombre) {
-        cantidad = c;
         identificador = nombre;
+        cantidad = c;
     }
 
-    @Override
-    public boolean equals(Object o) {
+    public int compareTo(Object o) {
+        int res = 1;
         if (o instanceof Ingrediente) {
-            Ingrediente i = (Ingrediente)o;
-            boolean aux = (identificador.equals((i.getNombre())));
-            if (aux && (unidad.equals(i.getUnidad())))
-                absorverIngrediente(i);
-            return aux;
+            Ingrediente aux = (Ingrediente)o;
+            String id = aux.getNombre();
+            if (aux.equals(this))
+                return 0;
+            if (identificador.equals(id)) {
+                try {
+                    String u = aux.getUnidad();
+                    Normalizador.emptyNullWord(u);
+                    if (u.equals(unidad))
+                        res =0;
+                } catch (Exception e) {
+                    if (unidad==null || unidad.isEmpty())
+                        res =0;
+                }
+            }
+            if (res==0) 
+                cantTotal(aux);
         }
-        return false;
+        return res;
     }
 
-    private void absorverIngrediente(Ingrediente other) {
-        cantidad += other.getCantidad();
+    public void cantTotal(Ingrediente i) {
+        cantidad += i.getCantidad();
     }
 
     public String getNombre() {
         return identificador;
     }
 
+    public String getUnidad() {
+        return unidad;
+    }
+
     public double getCantidad() {
         return cantidad;
     }
 
-    public String getUnidad() {
-        return unidad;
-    }
-    
     @Override 
     public String toString() {
         String cadena = "";
