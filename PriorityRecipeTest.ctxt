@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=PriorityRecipeTest
+comment0.text=\n\ The\ test\ class\ PriorityRecipeTest.\n\n\ @author\ \ (your\ name)\n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=
+comment1.target=void\ testCompareToMayor()
+comment2.params=
+comment2.target=void\ testCompareToMenor()
+comment3.params=
+comment3.target=void\ testCompareToIgual()
+numComments=4

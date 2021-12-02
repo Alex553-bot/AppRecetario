@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=Ingrediente
+comment1.params=c\ uni\ nombre
+comment1.target=Ingrediente(double,\ java.lang.String,\ java.lang.String)
+comment2.params=c\ nombre
+comment2.target=Ingrediente(int,\ java.lang.String)
+comment3.params=o
+comment3.target=int\ compareTo(java.lang.Object)
+comment4.params=i
+comment4.target=void\ cantTotal(Ingrediente)
+comment5.params=
+comment5.target=java.lang.String\ getNombre()
+comment6.params=
+comment6.target=java.lang.String\ getUnidad()
+comment7.params=
+comment7.target=double\ getCantidad()
+comment8.params=
+comment8.target=java.lang.String\ toString()
+numComments=9

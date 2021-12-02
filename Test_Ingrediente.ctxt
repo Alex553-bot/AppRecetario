@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=Test_Ingrediente
+comment1.params=
+comment1.target=void\ setUp()
+comment2.params=
+comment2.target=void\ tearDown()
+comment3.params=
+comment3.target=void\ testIngredientesIguales()
+comment4.params=
+comment4.target=void\ testIngredientesSimilares()
+comment5.params=
+comment5.target=void\ testCrearIngredienteConValorNegativo()
+comment6.params=
+comment6.target=void\ testEscrituraIngredientes()
+comment7.params=
+comment7.target=void\ testEscrituraIngredientes2()
+numComments=8
