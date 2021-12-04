@@ -7,13 +7,13 @@ import tools.Normalizador;
 public class Recetario {
     private File directorio;
     public Recetario(String path) throws IOException {
-        directorio = new File(path+"archivos/recetas/");
+        directorio = new File(path+"/archivos/recetas/");
         if (!directorio.exists())
             directorio.mkdir();
     }
 
     public Recetario() {
-        directorio = new File("archivos/recetas/");
+        directorio = new File("./archivos/recetas/");
         if (!directorio.exists())
             directorio.mkdir();
     }

@@ -29,17 +29,18 @@ public class Ingrediente implements Comparable{
             if (aux.equals(this))
                 return 0;
             if (identificador.equals(id)) {
-                res =0;
                 try {
                     String u = aux.getUnidad();
                     Normalizador.emptyNullWord(u);
                     if (u.equals(unidad))
-                        cantTotal(aux);
+                        res =0;
                 } catch (Exception e) {
                     if (unidad==null || unidad.isEmpty())
-                        cantTotal(aux);
+                        res =0;
                 }
             }
+            if (res==0) 
+                cantTotal(aux);
         }
         return res;
     }

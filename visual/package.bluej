@@ -1,9 +1,9 @@
 #BlueJ package file
-dependency1.from=FrameBuscador
-dependency1.to=LaminaBuscador
+dependency1.from=LaminaBuscador
+dependency1.to=FrameBuscador
 dependency1.type=UsesDependency
-dependency2.from=LaminaBuscador
-dependency2.to=FrameBuscador
+dependency2.from=FrameBuscador
+dependency2.to=LaminaBuscador
 dependency2.type=UsesDependency
 objectbench.height=93
 objectbench.width=451

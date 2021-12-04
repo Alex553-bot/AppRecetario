@@ -33,9 +33,9 @@ public class Normalizador {
     
     public static boolean matched(String word) throws Exception{
         boolean isNumeric = word.matches("[0-9]+");//word.matches("[+-]?\\d*(\\.\\d+)?");
-        if(isNumeric) {
-            throw new Exception();
-        }
+        //if(isNumeric) {
+          //  throw new Exception();
+        //}
         return isNumeric;
     }
     
@@ -74,5 +74,13 @@ public class Normalizador {
         }
 
         return word;
+    }
+    
+    public static String[] deletePlural(String... words) {
+        String[] simple_words = new String[words.length];
+        for(int i = 0; i < words.length; i++) {
+            simple_words[i] = deletePlural(words[i]);
+        }
+        return simple_words;
     }
 }

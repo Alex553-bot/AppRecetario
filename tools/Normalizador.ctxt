@@ -16,4 +16,6 @@ comment7.params=word
 comment7.target=java.lang.String\ deleteSpaces(java.lang.String)
 comment8.params=word
 comment8.target=java.lang.String\ deletePlural(java.lang.String)
-numComments=9
+comment9.params=words
+comment9.target=java.lang.String[]\ deletePlural(java.lang.String[])
+numComments=10

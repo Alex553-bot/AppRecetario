@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 import visual.*;
 import javax.swing.JOptionPane;
+import javax.swing.*;
 
 public class Buscador {
     private File main_file;
@@ -63,13 +64,21 @@ public class Buscador {
         if (nombre.isEmpty()) {
             throw new Exception("String is empty... ");
         }
-        nombre = Normalizador.deleteSpaces(nombre);
+        String name = Normalizador.deleteSpaces(nombre);
         for(File file: listaArchivos) {
-            if (file.getName().equals(nombre + ".txt")) {
-                new FrameBuscador(file);
+            if (file.getName().equals(name + ".txt")) {
+                try{
+                    ArrayList<File> sugerencias = sugerirRecetas(nombre);
+                    sugerencias.add(0, file);
+                    new FrameBuscador(sugerencias);
+                }catch (java.lang.Exception e){
+                    e.printStackTrace();
+                }               
                 return file;    
             }
         }
+        ArrayList<File> sugerencias = sugerirRecetas(nombre);
+        new FrameBuscador(sugerencias);
         return null;
     }
     
@@ -95,6 +104,7 @@ public class Buscador {
      */
     public PriorityQueue<PriorityRecipe> buscarRecetasPorIngredientes(String... ingredientes) throws Exception {   
         ingredientes = Normalizador.deleteVoid(ingredientes);
+        ingredientes = Normalizador.deletePlural(ingredientes);
         PriorityQueue<PriorityRecipe> recetas = new PriorityQueue<PriorityRecipe>(Collections.reverseOrder());
         for (File file: listaArchivos) {
             int ocurrencia = contarIngredientesContenidos(file, ingredientes);
@@ -184,6 +194,15 @@ public class Buscador {
                     && file.getName().contains(array[0])) {
                 recetas.add(file);
             }
+        }
+        //new FrameBuscador(recetas);
+        return recetas;
+    }
+    
+    public ArrayList<File> mostrarTodo() {
+        ArrayList<File> recetas = new ArrayList<File>();
+        for(File file: listaArchivos) {
+            recetas.add(file);
         }
         new FrameBuscador(recetas);
         return recetas;

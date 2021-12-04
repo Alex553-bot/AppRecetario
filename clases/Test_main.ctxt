@@ -70,7 +70,7 @@ comment4.params=
 comment4.target=void\ tearDown()
 comment5.params=
 comment5.target=void\ testIngresarReceta()
-comment5.text=@Test\ \n\ \ \ \ public\ void\ test1()\ throws\ Exception{\n\ \ \ \ Receta\ a\ \=\ new\ Receta("nombre");\n\ \ \ \ Ingrediente\ i\ \=\ new\ Ingrediente(4,"litros","aceite");\n\ \ \ \ a\ \=\ mock(Receta.class);\n\ \ \ \ a.agregarIngrediente(i);\n\ \ \ \ when(a.agregarIngrediente(i)).thenReturn(true);\n\ \ \ \ System.out.println(a.toString());\n\ \ \ \ assertTrue(a.agregarIngrediente(i));\n}
+comment5.text=@Test\ \r\n\ \ \ \ public\ void\ test1()\ throws\ Exception{\r\n\ \ \ \ Receta\ a\ \=\ new\ Receta("nombre");\r\n\ \ \ \ Ingrediente\ i\ \=\ new\ Ingrediente(4,"litros","aceite");\r\n\ \ \ \ a\ \=\ mock(Receta.class);\r\n\ \ \ \ a.agregarIngrediente(i);\r\n\ \ \ \ when(a.agregarIngrediente(i)).thenReturn(true);\r\n\ \ \ \ System.out.println(a.toString());\r\n\ \ \ \ assertTrue(a.agregarIngrediente(i));\r\n}
 comment6.params=
 comment6.target=void\ testRecetaNulaInvalida()
 comment7.params=

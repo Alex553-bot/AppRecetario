@@ -87,7 +87,7 @@ public class Test_Receta {
         Ingrediente i2 = new Ingrediente(3.1, "gr", "harina");
         receta.agregarIngrediente(i1);
         boolean respuesta = receta.verificarIngrediente(i2);
-        assertFalse(respuesta);
+        assertTrue(respuesta);
     }
 
     @Test
