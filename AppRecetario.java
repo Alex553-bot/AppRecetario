@@ -3,6 +3,7 @@ import clases.*;
 import java.util.Scanner;
 import javax.swing.*;
 import java.util.ArrayList;
+import java.awt.*;
 
 /**
  * Write a description of class AppRecetario here.
@@ -15,22 +16,38 @@ public class AppRecetario {
     private Buscador buscador;
     private Scanner lector;
     private Receta newReceta;
+    private Icon iconoBienvenida;
+
+    private final Toolkit myScreen = Toolkit.getDefaultToolkit();
     
     public AppRecetario() {
         recetario = new Recetario();
         buscador  = new Buscador("./archivos/recetas/");
         lector    = new Scanner(System.in);
+        iconoBienvenida = new ImageIcon(myScreen.getImage("./assets/icon2.png").getScaledInstance(50, 50, Image.SCALE_SMOOTH));
     }
     
     public void start() {
         int option = -1;
         boolean fin = false;
-        JOptionPane.showMessageDialog(null, "BIENVENIDO :)");
+        Object[] ops = new Object[1];
+        ops[0] = new JButton("Enter");
+        JOptionPane.showMessageDialog(null, "   BIENVENIDO :)", "CookBook" , JOptionPane.DEFAULT_OPTION, iconoBienvenida);
         while(option != 4) {
             showMenu();
             System.out.print("Opcion: ");
-            option = lector.nextInt();
-            showOption(option);
+            try{
+                option = lector.nextInt();
+                showOption(option);
+            }catch(java.util.InputMismatchException e) {
+                System.out.println("Error, digite un numero...!");
+                option = -1;
+                lector.nextLine();
+            }catch(Exception ex){
+                System.out.println("Error..." + ex.getMessage());
+                option = -1;
+                lector.nextLine();
+            }
         }
     }
     
@@ -50,11 +67,17 @@ public class AppRecetario {
             break;
             case 3: 
                 clearConsole();
-                System.out.println("+*******************************+");
-                System.out.println(" Total Recetas: "+buscador.mostrarTodo().size());
-                System.out.println("+*******************************+");
+                String cantidadRecetas = "|   Total Recetas: "+buscador.mostrarTodo().size() + "   |";
+                String margen = "|";
+                for(int i = 0; i  < cantidadRecetas.length() - 2; i++) {
+                    margen += "*";
+                }
+                margen += "|";
+                System.out.println(margen);
+                System.out.println(cantidadRecetas);
+                System.out.println(margen);
             break;
-            case 4: System.out.println("Adios...");
+            case 4: JOptionPane.showMessageDialog(null, "   HASTA LA PROXIMA :)", "CookBook" , JOptionPane.DEFAULT_OPTION, iconoBienvenida);
             break;
             default:
             System.out.println("Opcion no valida...");
@@ -72,8 +95,18 @@ public class AppRecetario {
                                 " 4. Buscar Receta con ingrediente especifico\n" +
                                 " 5. Atras");
             System.out.print("Opcion: ");
-            option = lector.nextInt();
-            option = actShearch(option);
+            try{
+                option = lector.nextInt();
+                option = actShearch(option);
+            }catch(java.util.InputMismatchException e) {
+                System.out.println("Error, digite un numero...!");
+                option = -1;
+                lector.nextLine();
+            }catch(Exception ex){
+                System.out.println("Error..." + ex.getMessage());
+                option = -1;
+                lector.nextLine();
+            }
         }
     }
     
@@ -184,7 +217,7 @@ public class AppRecetario {
                 System.out.println("Error..." + e.getMessage());
             }finally{
                 buscador  = new Buscador("./archivos/recetas/");
-                guardar = "guardar";
+                guardar   = "guardar";
             }                
         }
     }
@@ -206,33 +239,30 @@ public class AppRecetario {
             int salir = 0;
             Ingrediente ing;
             while(salir != 2) {
-                clearConsole();
-                System.out.println("CREANDO INGREDIENTE");
-                System.out.print("Ingrese el ingrediente: ");
-                String name = lector.nextLine();
-                System.out.print("Ingrese la cantidad: ");
-                double cant = Double.parseDouble(lector.nextLine());
-                System.out.print("Ingrese la unidad o un punto si no la requiere: ");
-                String ud = lector.nextLine();
-                if(ud.equals(".")) {
-                    ing = new Ingrediente((int)cant, name);
-                }else{
-                    ing = new Ingrediente(cant, ud, name);
-                }
-                newReceta.agregarIngrediente(ing);
-                do {
+                try{
                     clearConsole();
-                    System.out.println("¿Quiere ingresar otro ingrediente?\n" +
-                                    " 1. SI\n" + 
-                                    " 2. Continuar");
-                    System.out.print("Opcion: ");
-                    salir = lector.nextInt();
-                    if (salir != 1 && salir != 2) {
-                        System.out.println("Opcion no valida...");
-                        Thread.sleep(1000);
+                    System.out.println("CREANDO INGREDIENTE");
+                    System.out.print("Ingrese el ingrediente: ");
+                    String name = lector.nextLine();
+                    System.out.print("Ingrese la cantidad: ");
+                    double cant = Double.parseDouble(lector.nextLine());
+                    System.out.print("Ingrese la unidad o un punto si no la requiere: ");
+                    String ud = lector.nextLine();
+                    if(ud.equals(".")) {
+                        ing = new Ingrediente((int)cant, name);
+                    }else{
+                        ing = new Ingrediente(cant, ud, name);
                     }
-                }while (salir != 1 && salir != 2);
-                lector.nextLine();
+                    newReceta.agregarIngrediente(ing);
+                    salir = repetir("ingrediente", "Continuar", salir);
+                }catch (java.util.InputMismatchException e) {
+                    System.out.println("Error..." + e.getMessage() + "\nPresione Enter para volver a ingresar");
+                    lector.nextLine();
+                }catch (Exception ex) {
+                    System.out.println("Error..." + ex.getMessage() + "\nPresione Enter para volver a ingresar");
+                    lector.nextLine();
+                }
+                
             }
         }catch(Exception e) {
             System.out.println("Error..." + e.getMessage());
@@ -248,23 +278,38 @@ public class AppRecetario {
                 System.out.print("Ingrese el procedimiento: ");
                 String proc = lector.nextLine();
                 newReceta.agregarProceso(proc);
-                do {
-                    clearConsole();
-                    System.out.println("¿Quiere ingresar otro procedimiento?\n" +
-                                    " 1. SI\n" + 
-                                    " 2. Finalizar y Guardar");
-                    System.out.print("Opcion: ");
-                    salir = lector.nextInt();
-                    if (salir != 1 && salir != 2) {
-                        System.out.println("Opcion no valida...");
-                        Thread.sleep(1000);
-                    }
-                }while (salir != 1 && salir != 2);
-                lector.nextLine();
+                salir = repetir("procedimiento", "Finalizar y Guardar", salir);
             }            
         }catch(Exception e) {
             System.out.println("Error..." + e.getMessage());
         }
+    }
+
+    private int repetir(String name, String message, int salir) {
+        do {
+            clearConsole();
+            System.out.println("¿Quiere ingresar otro "+name+"?\n" +
+                                " 1. SI\n" + 
+                                " 2. " + message);
+            System.out.print("Opcion: ");
+            try{
+                salir = lector.nextInt();
+                if (salir != 1 && salir != 2) {
+                    System.out.println("Opcion no valida...");
+                    Thread.sleep(1000);
+                }
+            }catch(java.util.InputMismatchException e) {
+                    System.out.println("Error, digite un numero...!");
+                    salir = 0;
+                    lector.nextLine();
+            }catch(Exception ex) {
+                    System.out.println("Error..." + ex.getMessage());
+                    salir = 0;
+                    lector.nextLine();
+            }
+        }while (salir != 1 && salir != 2);
+        lector.nextLine();
+        return salir;
     }
     
     private void clearConsole() {
