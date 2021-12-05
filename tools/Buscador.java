@@ -195,7 +195,7 @@ public class Buscador {
                 recetas.add(file);
             }
         }
-        //new FrameBuscador(recetas);
+        new FrameBuscador(recetas);
         return recetas;
     }
     

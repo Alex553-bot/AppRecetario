@@ -36,16 +36,7 @@ public class Receta {
     }
 
     public void agregarProceso(String paso) throws Exception{
-        boolean res = (paso==null || paso.isEmpty());
-        int i=0;
-        Normalizador normalizador = new Normalizador();
-        if (!res)
-            paso = normalizador.standardize(paso);
-        while (!res && i<pasos.size()) {
-            res = paso.equals(pasos.get(i));
-            i++;
-        }
-        if (res) {
+        if (!verificarProceso(paso)) {
             throw new Exception("error al ingresar el paso");
         }
         pasos.add(paso);
