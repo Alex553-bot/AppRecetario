@@ -25,6 +25,7 @@ public class AppRecetario {
     public void start() {
         int option = -1;
         boolean fin = false;
+        JOptionPane.showMessageDialog(null, "BIENVENIDO :)");
         while(option != 4) {
             showMenu();
             System.out.print("Opcion: ");

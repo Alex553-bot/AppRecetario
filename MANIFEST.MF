@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Created-By: Just Clean Code & Supremos
+Main-Class: AppRecetario
+X-COMMENT: Se requiera la JMV

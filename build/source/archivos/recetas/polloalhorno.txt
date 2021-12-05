@@ -1,0 +1,10 @@
+Pollo al horno
+Receta clasica de mi abuela
+INGREDIENTES
+   - 1.0 kilo pollo
+   - 1.0 kilo arroz
+   - 1.0 mostaza
+PREPARACION
+   1.- lavar el pollo
+   2.- trozar el pollo
+   3.- picar los tomates
