@@ -19,14 +19,14 @@ public class AppRecetario {
     private Icon iconoBienvenida;
 
     private final Toolkit myScreen = Toolkit.getDefaultToolkit();
-    
+
     public AppRecetario() {
         recetario = new Recetario();
         buscador  = new Buscador("./archivos/recetas/");
         lector    = new Scanner(System.in);
         iconoBienvenida = new ImageIcon(myScreen.getImage("./assets/icon2.png").getScaledInstance(50, 50, Image.SCALE_SMOOTH));
     }
-    
+
     public void start() {
         int option = -1;
         boolean fin = false;
@@ -50,21 +50,21 @@ public class AppRecetario {
             }
         }
     }
-    
+
     private void showMenu() {
         System.out.println("\nCookBook\n" + 
-                            " 1. Buscar Recetas\n" +
-                            " 2. Agregar Receta\n" +
-                            " 3. Ver todas las recetas\n" +
-                            " 4. Salir");
+            " 1. Buscar Recetas\n" +
+            " 2. Agregar Receta\n" +
+            " 3. Ver todas las recetas\n" +
+            " 4. Salir");
     }
-    
+
     private void showOption(int option) {
         switch(option) {
             case 1: shearchMenu();
-            break;
+                break;
             case 2: addMenu();
-            break;
+                break;
             case 3: 
                 clearConsole();
                 String cantidadRecetas = "|   Total Recetas: "+buscador.mostrarTodo().size() + "   |";
@@ -76,24 +76,24 @@ public class AppRecetario {
                 System.out.println(margen);
                 System.out.println(cantidadRecetas);
                 System.out.println(margen);
-            break;
+                break;
             case 4: JOptionPane.showMessageDialog(null, "   HASTA LA PROXIMA :)", "CookBook" , JOptionPane.DEFAULT_OPTION, iconoBienvenida);
-            break;
+                break;
             default:
-            System.out.println("Opcion no valida...");
+                System.out.println("Opcion no valida...");
         }
     }
-    
+
     private void shearchMenu() {
         clearConsole();
         int option = -1;
         while(option != 5) {
             System.out.println("\nCookBook\n" + 
-                                " 1. Buscar Receta por nombre\n" + 
-                                " 2. Buscar Receta por ingredientes\n" + 
-                                " 3. Buscar Receta sin ingredientes\n" +
-                                " 4. Buscar Receta con ingrediente especifico\n" +
-                                " 5. Atras");
+                " 1. Buscar Receta por nombre\n" + 
+                " 2. Buscar Receta por ingredientes\n" + 
+                " 3. Buscar Receta sin ingredientes\n" +
+                " 4. Buscar Receta con ingrediente especifico\n" +
+                " 5. Atras");
             System.out.print("Opcion: ");
             try{
                 option = lector.nextInt();
@@ -109,7 +109,7 @@ public class AppRecetario {
             }
         }
     }
-    
+
     private void pedir(int type) {
         int i;
         String cad;
@@ -145,7 +145,7 @@ public class AppRecetario {
             System.out.println("Error..." + e.getMessage());
         }    
     }
-    
+
     private int actShearch(int option) {
         clearConsole();
         lector.nextLine();
@@ -161,16 +161,16 @@ public class AppRecetario {
                 }catch (Exception e){
                     System.out.println("Error..." + e.getMessage());
                 }
-            break;
-            
+                break;
+
             case 2:
                 pedir(1);
-            break;
-            
+                break;
+
             case 3:
                 pedir(2);
-            break;
-            
+                break;
+
             case 4:
                 cad = "";
                 try{
@@ -180,17 +180,17 @@ public class AppRecetario {
                 }catch (Exception e){
                     System.out.println("Error..." + e.getMessage());
                 }
-            break;
-            
+                break;
+
             case 5:
                 res = 5;
-            break;
-            
+                break;
+
             default: System.out.println("Opcion no valida");
         }
         return res;
     }
-    
+
     private void addMenu() {
         lector.nextLine();
         String cad = "";
@@ -221,19 +221,23 @@ public class AppRecetario {
             }                
         }
     }
-    
+
     private void createRecipe() {
-        try{
-            System.out.print("Nombre de la receta: ");
-            String name = lector.nextLine();
-            System.out.print("Descripcion de la receta: ");
-            String desc = lector.nextLine();
-            newReceta = new Receta(name, desc);
-        }catch(Exception e) {
-            System.out.println("Error..." + e.getMessage());
-        }
+        boolean res = true;
+        do {
+            try{
+                System.out.print("Nombre de la receta: ");
+                String name = lector.nextLine();
+                System.out.print("Descripcion de la receta: ");
+                String desc = lector.nextLine();
+                newReceta = new Receta(name, desc);
+                res = false;
+            }catch(Exception e) {
+                System.out.println("Error..." + e.getMessage());
+            }
+        } while(res);
     }
-    
+
     private void ingresarIngredientes() {
         try{
             int salir = 0;
@@ -262,13 +266,13 @@ public class AppRecetario {
                     System.out.println("Error..." + ex.getMessage() + "\nPresione Enter para volver a ingresar");
                     lector.nextLine();
                 }
-                
+
             }
         }catch(Exception e) {
             System.out.println("Error..." + e.getMessage());
         }
     }
-    
+
     private void ingresarPreparacion() {
         try{
             int salir = 0;
@@ -289,8 +293,8 @@ public class AppRecetario {
         do {
             clearConsole();
             System.out.println("¿Quiere ingresar otro "+name+"?\n" +
-                                " 1. SI\n" + 
-                                " 2. " + message);
+                " 1. SI\n" + 
+                " 2. " + message);
             System.out.print("Opcion: ");
             try{
                 salir = lector.nextInt();
@@ -299,19 +303,19 @@ public class AppRecetario {
                     Thread.sleep(1000);
                 }
             }catch(java.util.InputMismatchException e) {
-                    System.out.println("Error, digite un numero...!");
-                    salir = 0;
-                    lector.nextLine();
+                System.out.println("Error, digite un numero...!");
+                salir = 0;
+                lector.nextLine();
             }catch(Exception ex) {
-                    System.out.println("Error..." + ex.getMessage());
-                    salir = 0;
-                    lector.nextLine();
+                System.out.println("Error..." + ex.getMessage());
+                salir = 0;
+                lector.nextLine();
             }
         }while (salir != 1 && salir != 2);
         lector.nextLine();
         return salir;
     }
-    
+
     private void clearConsole() {
         try{
             if (System.getProperty("os.name").contains("Windows")) {
@@ -323,7 +327,7 @@ public class AppRecetario {
             System.out.println(e.getMessage());
         }
     }
-    
+
     public static void main(String[] args) {
         AppRecetario app = new AppRecetario();
         app.start();
